@@ -27,26 +27,26 @@ export default function Projects() {
   ];
 
   return (
-    <section className="py-36 px-6 bg-slate-950/10">
+    <section className="py-24 sm:py-32 md:py-36 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
 
         {/* SECTION DIVIDER */}
         <div className="h-px bg-gray-800 mb-16"></div>
 
         {/* TITLE */}
-        <h2 className="text-3xl font-semibold mb-14 tracking-tight text-white">
+        <h2 className="text-2xl sm:text-3xl font-semibold mb-8 sm:mb-14 tracking-tight text-white">
           Selected Work
         </h2>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid gap-6 sm:gap-8 md:gap-10">
           {projects.map((p, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-slate-900/95 p-7 rounded-[2rem] border border-cyan-500/10 shadow-[0_20px_40px_rgba(14,165,233,0.12)] hover:border-cyan-400/30 hover:-translate-y-1 transition duration-300 cursor-pointer"
+              className="bg-slate-900/95 p-5 sm:p-6 md:p-7 rounded-2xl sm:rounded-3xl border border-cyan-500/10 shadow-[0_20px_40px_rgba(14,165,233,0.12)] hover:border-cyan-400/30 hover:-translate-y-1 transition duration-300 cursor-pointer"
               onClick={() => {
                 // Convert project name to URL-friendly slug
                 const slug = p.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -54,7 +54,7 @@ export default function Projects() {
               }}
             >
               {/* PROJECT NAME */}
-              <h3 className="text-lg font-semibold mb-2 text-cyan-200">
+              <h3 className="text-base sm:text-lg font-semibold mb-2 text-cyan-200">
                 {p.name}
               </h3>
 

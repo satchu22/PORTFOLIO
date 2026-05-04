@@ -76,34 +76,34 @@ export default function Dashboard() {
   };
 
   return (
-    <section className="py-36 px-6 bg-slate-950/10">
+    <section className="py-24 sm:py-32 md:py-36 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
 
         {/* DIVIDER */}
         <div className="h-px bg-gray-800 mb-16"></div>
 
         {/* TITLE */}
-        <div className="flex items-center justify-between mb-14">
-          <h2 className="text-3xl font-semibold tracking-tight text-white">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 sm:mb-14 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">
             System Status
           </h2>
           <button
             onClick={updateSystemStatus}
-            className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 text-sm font-semibold shadow-lg shadow-cyan-500/20 transition duration-200 hover:scale-[1.02]"
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 text-sm font-semibold shadow-lg shadow-cyan-500/20 transition duration-200 hover:scale-[1.02] w-full sm:w-auto"
           >
             Refresh Status
           </button>
         </div>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid gap-6 sm:gap-8 md:gap-10">
           {systems.map((sys, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-slate-900/95 p-6 rounded-[2rem] border border-cyan-500/10 shadow-[0_18px_45px_rgba(14,165,233,0.12)] hover:border-cyan-400/25 hover:-translate-y-1 transition duration-300"
+              className="bg-slate-900/95 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-cyan-500/10 shadow-[0_18px_45px_rgba(14,165,233,0.12)] hover:border-cyan-400/25 hover:-translate-y-1 transition duration-300"
             >
               {/* TITLE */}
               <h3 className="text-lg font-semibold mb-2">

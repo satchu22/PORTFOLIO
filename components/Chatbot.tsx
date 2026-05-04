@@ -211,13 +211,13 @@ Ask about a specific title or mention a technology and I will explain it.`;
   };
 
   return (
-    <section className="py-28 px-6 bg-slate-950/10">
+    <section className="py-20 sm:py-24 md:py-28 px-4 sm:px-6">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-8">
+        <h2 className="text-2xl sm:text-3xl font-semibold mb-6 sm:mb-8">
           Ask Me About My Work
         </h2>
 
-        <div className="bg-slate-950/70 backdrop-blur-xl border border-cyan-400/10 p-6 rounded-2xl shadow-lg shadow-cyan-500/10">
+        <div className="bg-slate-950/70 backdrop-blur-xl border border-cyan-400/10 p-4 sm:p-6 rounded-2xl shadow-lg shadow-cyan-500/10">
           <div className="mb-4 rounded-3xl border border-white/10 bg-slate-950/80 p-5 shadow-inner">
             <p className="text-sm text-slate-300 mb-2">
               Ask me anything about the projects in my portfolio. I’ll answer from the project details and GitHub descriptions.
@@ -263,7 +263,7 @@ Ask about a specific title or mention a technology and I will explain it.`;
           </div>
 
           {/* INPUT */}
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -274,12 +274,12 @@ Ask about a specific title or mention a technology and I will explain it.`;
                 }
               }}
               placeholder="Ask about my work..."
-              className="flex-1 p-3 rounded-lg bg-gray-900 border border-gray-700 text-white outline-none"
+              className="flex-1 p-3 rounded-2xl bg-slate-900/90 border border-cyan-500/20 text-white outline-none focus:border-cyan-400"
             />
 
             <button
               onClick={handleSendMessage}
-              className="bg-white text-black px-5 rounded-lg font-medium hover:scale-105 transition"
+              className="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-3 text-slate-950 font-semibold shadow-lg shadow-cyan-500/20 hover:scale-105 transition"
             >
               Send
             </button>
