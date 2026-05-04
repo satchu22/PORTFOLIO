@@ -1,50 +1,88 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Navbar() {
+  const [active, setActive] = useState("");
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#0B0F19]/90 backdrop-blur-md">
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center px-6 md:px-10">
-        {/* LEFT: NAME */}
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-700/20 bg-slate-950/70 backdrop-blur-xl shadow-black/20">
+      <div className="flex items-center justify-between w-full px-8 md:px-12 py-4">
+        
+        {/* LEFT */}
         <a
-          href="#home"
-          className="shrink-0 text-2xl font-semibold tracking-tight text-white"
+          href="/"
+          className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-400 font-semibold text-lg tracking-tight hover:opacity-90 transition"
         >
-          Satchidanand <span className="text-slate-400">Deshmukh</span>
+          Satchidanand J. Deshmukh
         </a>
 
-        {/* RIGHT: NAV LINKS */}
-        <div className="ml-auto flex items-center gap-6 md:gap-8">
-          <a
-            href="#projects"
-            className="text-sm md:text-base font-medium text-slate-300 transition hover:text-white"
-          >
-            Projects
-          </a>
+        {/* RIGHT */}
+        <div className="flex items-center gap-8">
 
-          <a
-            href="#system"
-            className="text-sm md:text-base font-medium text-slate-300 transition hover:text-white"
-          >
-            System
-          </a>
+          {/* ✅ EXPERIENCE → PAGE (FIXED) */}
+          <NavItem
+            label="About"
+            href="/about"
+            active={active === "about"}
+            onClick={() => setActive("about")}
+          />
 
-          <a
-            href="#contact"
-            className="text-sm md:text-base font-medium text-slate-300 transition hover:text-white"
-          >
-            Contact
-          </a>
+          <NavItem
+            label="Experience"
+            href="/experience"
+            active={active === "experience"}
+            onClick={() => setActive("experience")}
+          />
 
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-lg border border-white/15 px-4 py-2 text-sm md:text-base font-medium text-white transition hover:bg-white hover:text-black"
-          >
-            Resume
-          </a>
+          {/* CONTACT → PAGE */}
+          <NavItem
+            label="Contact"
+            href="/contact"
+            active={active === "contact"}
+            onClick={() => setActive("contact")}
+          />
+
+          {/* RESUME → PAGE */}
+          <NavItem
+            label="Resume"
+            href="/resume"
+            active={active === "resume"}
+            onClick={() => setActive("resume")}
+          />
+
         </div>
       </div>
-    </nav>
+    </header>
+  );
+}
+
+function NavItem({
+  label,
+  href,
+  active,
+  onClick,
+}: {
+  label: string;
+  href: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      className={`relative text-sm font-medium transition group ${
+        active ? "text-cyan-200" : "text-slate-300 hover:text-white"
+      }`}
+    >
+      {label}
+
+      <span
+        className={`absolute left-0 bottom-[-4px] h-[2px] w-full bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-400 transition-all duration-300 ${
+          active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+        }`}
+      />
+    </a>
   );
 }
