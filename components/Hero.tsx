@@ -38,7 +38,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_25%),linear-gradient(180deg,_#020617_0%,_#090f26_100%)] px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 md:pt-32 text-white"
+      className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.14),_transparent_25%),radial-gradient(circle_at_90%_20%,_rgba(96,165,250,0.08),_transparent_20%),linear-gradient(180deg,_#06121e_0%,_#0b1c2e_35%,_#101f33_100%)] px-4 sm:px-6 md:px-8 lg:px-12 pt-24 sm:pt-28 md:pt-32 text-white"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-12 md:gap-16 lg:grid-cols-2">
 

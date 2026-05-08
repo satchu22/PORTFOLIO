@@ -360,7 +360,7 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <main className="min-h-screen bg-[#020617] text-white px-6 py-20">
+      <main className="min-h-screen bg-slate-950 text-white px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-semibold mb-4">Project Not Found</h1>
           <p className="text-gray-400 mb-8">The project you're looking for doesn't exist.</p>
@@ -376,7 +376,7 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white px-6 py-20">
+    <main className="min-h-screen bg-slate-950 text-white px-6 py-20">
       <div className="max-w-6xl mx-auto">
 
         {/* HEADER */}

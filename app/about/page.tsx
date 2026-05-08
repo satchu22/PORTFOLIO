@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <section className="min-h-screen bg-[#020617] px-8 py-20 text-white md:px-12">
+    <section className="min-h-screen bg-slate-950 px-8 py-20 text-white md:px-12">
       <div className="mx-auto max-w-6xl space-y-10">
         <div className="space-y-4 rounded-[2rem] border border-white/10 bg-slate-950/80 p-10 shadow-[0_40px_120px_rgba(15,23,42,0.65)] backdrop-blur-xl">
           <span className="inline-flex rounded-full bg-sky-500/10 px-4 py-1 text-sm font-semibold text-sky-200">

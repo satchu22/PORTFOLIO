@@ -99,7 +99,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#020617] text-white px-6 py-20">
+    <main className="min-h-screen bg-slate-950 text-white px-6 py-20">
       <div className="max-w-6xl mx-auto">
 
         {/* HEADER */}

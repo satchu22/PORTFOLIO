@@ -2,7 +2,7 @@
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-[#020617] text-white flex flex-col items-center justify-center px-6">
+    <main className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center px-6">
 
       {/* PHOTO */}
       <img

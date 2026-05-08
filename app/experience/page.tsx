@@ -2,7 +2,7 @@
 
 export default function ExperiencePage() {
   return (
-    <main className="min-h-screen bg-[#020617] text-white px-6 py-20">
+    <main className="min-h-screen bg-slate-950 text-white px-6 py-20">
       <div className="max-w-5xl mx-auto">
 
         {/* TOP BAR */}
