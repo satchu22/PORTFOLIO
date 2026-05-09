@@ -42,7 +42,9 @@ export default function Chatbot() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        const errorBody = await response.json().catch(() => null);
+        const serverError = errorBody?.error || response.statusText || 'Failed to get response';
+        throw new Error(serverError);
       }
 
       const data = await response.json();
@@ -57,12 +59,13 @@ export default function Chatbot() {
       );
     } catch (error) {
       console.error('Chat error:', error);
+      const errorMessage = error instanceof Error ? error.message : "Sorry, I'm having trouble connecting right now. Please try again later.";
       setMessages(prev =>
         prev.map((msg, index) =>
           index === prev.length - 1
             ? {
                 user: userMessage,
-                bot: "Sorry, I'm having trouble connecting right now. Please try again later.",
+                bot: errorMessage,
                 loading: false
               }
             : msg
@@ -98,7 +101,7 @@ export default function Chatbot() {
         <div className="bg-slate-950/70 backdrop-blur-xl border border-cyan-400/10 p-4 sm:p-6 rounded-2xl shadow-lg shadow-cyan-500/10">
           <div className="mb-4 rounded-3xl border border-white/10 bg-slate-950/80 p-5 shadow-inner">
             <p className="text-sm text-slate-300 mb-2">
-              Ask me anything about Mangesh's background, projects, experience, or certifications. I'm powered by AI to give you detailed, personalized answers.
+              Ask me anything about Satchidanand's background, projects, experience, or certifications. I'm powered by Groq AI to give you detailed, personalized answers.
             </p>
             <div className="flex flex-wrap gap-2 text-sm">
               {exampleQuestions.map((question, idx) => (
