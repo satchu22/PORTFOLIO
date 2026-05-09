@@ -30,27 +30,80 @@ Satchidanand is a full-stack developer with experience across frontend, backend,
 - Do not add extra information beyond the sources listed.
 - Keep answers professional and focused on his real experience.`;
 
-export async function POST(request: Request) {
-  try {
-    if (!process.env.GROQ_API_KEY) {
-      return Response.json(
-        { error: "GROQ_API_KEY environment variable is not set. Please add it to your .env.local file." },
-        { status: 500 }
-      );
-    }
+const fallbackResponses = [
+  {
+    keywords: ["experience", "background", "work history", "career"],
+    response:
+      "Satchidanand Deshmukh is a full-stack developer with experience across frontend, backend, AI, and cloud technologies. He has built projects in React, Next.js, Python, Flask, and AR/VR, and his portfolio demonstrates practical work in machine learning, web development, and system design.",
+  },
+  {
+    keywords: ["realitytwin", "digital twin", "ar/vr"],
+    response:
+      "RealityTwin is an AR/VR application that creates digital twins of physical spaces. It focuses on immersive visualization, simulation, and real-world system modeling.",
+  },
+  {
+    keywords: ["covid", "x-ray", "covid x-ray"],
+    response:
+      "COVID X-Ray is a machine learning project for analyzing chest X-rays to detect COVID-19. It combines image processing and model inference to support diagnostic predictions.",
+  },
+  {
+    keywords: ["vr escape room", "escape room", "vr"],
+    response:
+      "The VR Escape Room is an immersive virtual reality experience built to demonstrate interaction design, 3D environment handling, and user-driven game logic.",
+  },
+  {
+    keywords: ["zodiac flask", "flask", "zodiac"],
+    response:
+      "Zodiac Flask is a web application built with Flask that handles zodiac sign logic and user interaction via a web interface.",
+  },
+  {
+    keywords: ["zodiac java", "java"],
+    response:
+      "Zodiac Java is a Java-based application demonstrating backend programming and application logic for zodiac calculations.",
+  },
+  {
+    keywords: ["github", "linked in", "linkedin", "profile"],
+    response:
+      "Please check Satchidanand's GitHub at https://github.com/satchu22 and his LinkedIn at https://www.linkedin.com/in/satchidanand22199/ for the most accurate and current project and profile details.",
+  },
+];
 
+function getStaticResponse(message: string) {
+  const normalized = message.toLowerCase();
+
+  for (const item of fallbackResponses) {
+    if (item.keywords.some((keyword) => normalized.includes(keyword))) {
+      return `AI is currently unavailable. ${item.response}`;
+    }
+  }
+
+  return (
+    "AI is currently unavailable. Please try again later or ask a different question about Satchidanand's portfolio, resume, GitHub, or LinkedIn."
+  );
+}
+
+export async function POST(request: Request) {
+  const body = await request.json().catch(() => ({ message: "" }));
+  const message = typeof body.message === "string" ? body.message : "";
+
+  if (!message.trim()) {
+    return Response.json(
+      { error: "Message is required" },
+      { status: 400 }
+    );
+  }
+
+  if (!process.env.GROQ_API_KEY) {
+    return Response.json(
+      { response: getStaticResponse(message), fallback: true },
+      { status: 200 }
+    );
+  }
+
+  try {
     const groq = new Groq({
       apiKey: process.env.GROQ_API_KEY,
     });
-
-    const { message } = await request.json();
-
-    if (!message || typeof message !== "string") {
-      return Response.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
-    }
 
     const completion = await groq.chat.completions.create({
       messages: [
@@ -71,18 +124,20 @@ export async function POST(request: Request) {
     const response =
       completion.choices[0]?.message?.content || "No response generated";
 
-    return Response.json({ response });
+    return Response.json({ response, fallback: false });
   } catch (error) {
     console.error("Chat error:", error);
 
-    const errorMessage = error instanceof Error ? error.message : "Failed to generate response. Please try again.";
-    const responseError = errorMessage.includes("API key")
-      ? "Invalid or missing GROQ_API_KEY. Please check your .env.local file."
-      : errorMessage;
-
     return Response.json(
-      { error: responseError },
-      { status: 500 }
+      {
+        response: getStaticResponse(message),
+        fallback: true,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to generate response. Please try again.",
+      },
+      { status: 200 }
     );
   }
 }
